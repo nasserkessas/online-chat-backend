@@ -1,6 +1,9 @@
 import { WebSocketServer } from 'ws';
+import * as dotenv from 'dotenv'
 
-const wss = new WebSocketServer({ port: 8080 });
+dotenv.config();
+
+const wss = new WebSocketServer({ port: process.env.WS_PORT || 8080 });
 
 let clients = [];
 

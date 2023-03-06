@@ -1,17 +1,17 @@
 import * as http from 'http';
 import { readFileSync, writeFileSync } from 'fs'
 import { createRequire } from 'module';
+import * as dotenv from 'dotenv'
+
+dotenv.config();
 
 const require = createRequire(import.meta.url);
-
-const host = 'localhost';
-const port = 8000;
 
 const codeLen = 8;
 
 
 const requestListener = (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.setHeader('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
 
@@ -74,6 +74,6 @@ const generateCode = () => {
 }
 
 const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+server.listen(process.env.HTTP_PORT || 8000, () => {
+    console.log(`Server is running on http://localhost:${process.env.HTTP_PORT || 8000}`);
 });

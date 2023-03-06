@@ -26,8 +26,12 @@ dist-ssr
 
 # Valid codes file
 
-websocket/codes.json
+app/codes.json
 
 # Todo file
 
 todo
+
+# Environment
+
+.env
