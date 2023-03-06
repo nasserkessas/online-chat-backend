@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "ws": "^8.12.1"
+  },
+  "scripts": {
+    "start-ws": "node --watch ./app/server.js",
+    "start-http": "node --watch ./app/http.js"
+  }
+}
