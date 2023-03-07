@@ -51,7 +51,7 @@ const requestListener = (req, res) => {
                     const f = readFileSync(require.resolve("./codes.json"));
                     const data = JSON.parse(f);
 
-                    if (data.find((c) => c === code)) {
+                    if (Object.keys(data).find(c => c === code)) {
                         res.writeHead(200);
                         res.end(`{"message": "valid code"}`);
                     }
