@@ -1,5 +1,7 @@
 import * as http from 'http';
 import { readFileSync, writeFileSync } from 'fs'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import * as dotenv from 'dotenv'
 
@@ -25,7 +27,7 @@ const requestListener = (req, res) => {
                 const f = readFileSync(require.resolve("./codes.json"));
                 let data = JSON.parse(f);
 
-                data.push(code);
+                data[code] = [];
 
                 writeFileSync(require.resolve("./codes.json"), JSON.stringify(data));
 
@@ -72,6 +74,13 @@ const requestListener = (req, res) => {
 const generateCode = () => {
     return "abcdefghijklmnopqrstuvwxyzABSCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split('').sort(() => { return 0.5 - Math.random() }).join('').slice(0, codeLen);
 }
+
+const currentDir = dirname(fileURLToPath(import.meta.url));
+
+try {
+    writeFileSync(`${currentDir}/codes.json`, "{}", { flag: 'wx' })
+}
+catch (e) {}
 
 const server = http.createServer(requestListener);
 server.listen(process.env.HTTP_PORT || 8000, () => {
