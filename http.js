@@ -6,12 +6,12 @@ import express from 'express'
 import bodyParser from "body-parser";
 import cors from 'cors';
 
+dotenv.config();
+
 const app = express();
 
 app.use(cors({origin: process.env.FRONTEND_URL}))
 app.use(bodyParser.text());
-
-dotenv.config();
 
 const codeLen = 8;
 
@@ -21,8 +21,6 @@ if (process.env.SAVE_LOCATION == "same directory") {
 } else {
     save_dir = "/tmp";
 }
-
-console.log(save_dir);
 
 app.get('/code', (req, res) => {
     let code = generateCode()
