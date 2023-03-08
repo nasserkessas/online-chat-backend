@@ -26,7 +26,7 @@ dist-ssr
 
 # Valid codes file
 
-app/codes.json
+codes.json
 
 # Todo file
 
@@ -35,3 +35,4 @@ todo
 # Environment
 
 .env
+.vercel
